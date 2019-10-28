@@ -1,0 +1,43 @@
+
+div.gallery {
+    
+    margin: 5px;
+    border: 1px solid #000000;
+    float: left;
+    width: 180px;
+    background-color: #ffffff;
+    color: #007A33;
+}
+  
+div.gallery:hover {
+    border: 1px solid #007A33;
+}
+  
+div.gallery img {
+    width: 70%;
+    height: auto;
+    margin-left: 15%;
+}
+  
+div.desc {
+    padding: 15px;
+    text-align: center;
+    color: #007A33;
+    font-weight: bold;
+   
+}
+a {
+    text-decoration: none;
+}
+#botones{
+    
+    margin: 1%;
+
+}
+#botones a{
+    color: #007A33;
+    background-color: #ffffff;
+    border: 1px solid #007A33;
+    
+    padding: 5px;
+}
