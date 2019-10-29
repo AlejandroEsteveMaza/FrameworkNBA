@@ -8,6 +8,6 @@
         
     </head>
     <body>
-    <img src="public/images/celticsLogo.jpg" alt="Celtics Escudo" class="logo--center">
+    <img src="public/images/celticsEscudo.jpg" alt="Celtics Escudo" class="logo--center">
     </body>
 </html>

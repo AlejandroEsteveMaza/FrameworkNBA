@@ -11,12 +11,13 @@
 global $config;
 ?>
 
-<div class="topnav">
-  <a class="active" href="<?= $config["site"]["root"] . "/"?>"> Inicio </a>
-  <a href="<?= $config["site"]["root"] . "/equipo"?>">Equipo</a>
-  <a href="<?= $config["site"]["root"] . "/jugadores"?>">Jugadores</a>
+<div class="topnav" id="top">
+  <a class="btn" href="<?= $config["site"]["root"] . "/"?>"> Inicio </a>
+  <a class="btn" href="<?= $config["site"]["root"] . "/equipo"?>">Equipo</a>
+  <a class="btn" href="<?= $config["site"]["root"] . "/jugadores"?>">Jugadores</a>
+
+  <a href="" class="topnav--right">Inicia Sesión</a>
+  <a class="active" href="">Registrate</a>
 </div>
-
-
 </body>
 </html>
