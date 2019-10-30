@@ -26,4 +26,10 @@ class IndexController extends Controller {
     public function BorrarJugadorAction(){
        $this->renderView('jugadoresDelete');
     }
+    public function RegistroAction() {
+        $this->renderView('registro');
+    }
+    public function LoginAction() {
+        $this->renderView('login');
+    }
 }

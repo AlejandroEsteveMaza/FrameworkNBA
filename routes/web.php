@@ -40,6 +40,36 @@ return array(
             "controller" => "jugador",
             "action" => "datosJugador"
         ),
+
+        "Registro" => array(
+			"route" => "/registro",
+			"controller" => "index",
+			"action" => "registro"
+		),
+
+		"RegistroUsuario" => array(
+			"route" => "/registroUsuario",
+			"controller" => "register",
+			"action" => "register"
+		),
+
+		"login" => array(
+			"route" => "/login",
+			"controller" => "index",
+			"action" => "login"
+		),
+
+		"compruebaLogin" => array(
+			"route" => "/compruebaLogin",
+			"controller" => "login",
+			"action" => "validate"
+		),
+
+		"logout" => array(
+			"route" => "/logout",
+			"controller" => "login",
+			"action" => "logout"
+        ),
     ),
     "Error" => array(
         
