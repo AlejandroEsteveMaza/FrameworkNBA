@@ -21,6 +21,22 @@ class Input {
      * @return boolean
      */
     static function check($fields, $on = false) {
+        
+       foreach ($fields as $value) {
+          
+            if (!isset($fields) ) {
+           
+            }
+       }
+
+
+/* 
+        for ($i=0; $i < count($fields); $i++) { 
+            echo $fields[$i] ."---". $on[$i];
+            if ($fields[$i] != $on[$i]){
+
+            }
+        } */
     }
 
 
@@ -31,6 +47,7 @@ class Input {
      * @return string
      */
     static function str($value) {
+        return trim(preg_replace('/[^0-9a-zA-Z_-]/', '', $value));
     }
 
     /**

@@ -14,6 +14,7 @@ class Auth {
      * @return string
      */
     static function crypt($password) {
+        return password_hash($password, PASSWORD_DEFAULT);
     }
 
     /**
