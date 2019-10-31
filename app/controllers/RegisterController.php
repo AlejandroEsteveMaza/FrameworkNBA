@@ -34,7 +34,9 @@ class RegisterController extends Controller {
         $campos = ["user","password","password2"];
         $camposPOST = array_keys($_POST);
         if (Input::check($campos, $camposPOST)) {
-        
+            echo "hola";
+        }else{
+            echo "adios";
         }
     }
 

@@ -5,12 +5,13 @@ namespace core\form;
 /**
  * Clase para validar los campos de un formulario
  */
-class Input {
-    
+class Input
+{
+
     /**
      * Archivos de imagen permitidos
      */
-    static $whiteList = array ('jpg', 'png', 'bmp');
+    static $whiteList = array('jpg', 'png', 'bmp');
 
 
     /**
@@ -20,23 +21,21 @@ class Input {
      * @param boolean $on
      * @return boolean
      */
-    static function check($fields, $on = false) {
-        
-       foreach ($fields as $value) {
-          
-            if (!isset($fields) ) {
-           
+    static function check($fields, $on = false)
+    {
+        echo "<pre>";
+        var_dump($fields);
+        $containsAllValues = array_diff($fields, $on);
+
+        foreach ($fields as $value) {
+            if (in_array($value, $on)) {
+                echo "1";
+            }else{
+               return false;
+               break;
             }
-       }
-
-
-/* 
-        for ($i=0; $i < count($fields); $i++) { 
-            echo $fields[$i] ."---". $on[$i];
-            if ($fields[$i] != $on[$i]){
-
-            }
-        } */
+        }
+        return true;
     }
 
 
@@ -46,7 +45,8 @@ class Input {
      * @param string $value
      * @return string
      */
-    static function str($value) {
+    static function str($value)
+    {
         return trim(preg_replace('/[^0-9a-zA-Z_-]/', '', $value));
     }
 
@@ -56,7 +56,6 @@ class Input {
      * @param [type] $path
      * @return boolean
      */
-    static function checkImage($path) {
-    }
-
+    static function checkImage($path)
+    { }
 }
