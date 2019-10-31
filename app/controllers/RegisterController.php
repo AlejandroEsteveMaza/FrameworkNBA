@@ -29,14 +29,14 @@ class RegisterController extends Controller {
             $user = Input::str($_POST['user']);
             $password = Auth::crypt(Input::str($_POST['password']));
             $password2 = Auth::crypt(Input::str($_POST['password2']));
-            //echo $user;
+            
         }
         $campos = ["user","password","password2"];
         $camposPOST = array_keys($_POST);
         if (Input::check($campos, $camposPOST)) {
-            echo "hola";
+            $this->createUser($user, $password);
         }else{
-            echo "adios";
+            $this->renderView('registro');
         }
     }
 

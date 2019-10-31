@@ -23,16 +23,20 @@ class Input
      */
     static function check($fields, $on = false)
     {
-        echo "<pre>";
-        var_dump($fields);
+        /* echo "<pre>";
+        var_dump($on);
+        var_dump($fields); */
         $containsAllValues = array_diff($fields, $on);
-
-        foreach ($fields as $value) {
-            if (in_array($value, $on)) {
+       /*  foreach ($on as $value) {
+            if (in_array($value, $fields)) {
                 echo "1";
             }else{
                return false;
-               break;
+            }
+        } */
+        for ($i=0; $i < count($on)-1; $i++) { 
+            if (!in_array($on[$i], $fields)) { //anyadir or fields no sea mas de 3 cuando anayada el login ?¿
+                return false;
             }
         }
         return true;
