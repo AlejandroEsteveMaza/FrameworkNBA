@@ -27,13 +27,15 @@ class RegisterController extends Controller {
         
         if (isset($_POST['submit'])) {
             $user = Input::str($_POST['user']);
-            $password = Auth::crypt(Input::str($_POST['password']));
-            $password2 = Auth::crypt(Input::str($_POST['password2']));
-            
+            $password = Input::str($_POST['password']);
+            $password2 = Input::str($_POST['password2']);
         }
+
         $campos = ["user","password","password2"];
         $camposPOST = array_keys($_POST);
-        if (Input::check($campos, $camposPOST)) {
+
+        if (Input::check($campos, $camposPOST) && $password === $password2) {
+            $password = Auth::crypt($password);
             $this->createUser($user, $password);
         }else{
             $this->renderView('registro');
@@ -48,6 +50,14 @@ class RegisterController extends Controller {
      * @return int
      */
     private function createUser($userName, $password) {
+        $user = new UserModel();
+        $user::getUserNameField();
+        $user::getPasswordField();
+        if ($user->save()) {
+            return $user->lastInsertId();
+        }else{
+            return -1;
+        }
     }
 
     /**
@@ -58,6 +68,9 @@ class RegisterController extends Controller {
      * @return boolean
      */
     private function uploadAvatar($fileName, $tmpFileName, $idUser) {
+        if (Input::checkImage($fileName)) {
+            //inacabado
+        }
     }
 
 }

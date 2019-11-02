@@ -26,15 +26,15 @@ class Input
         /* echo "<pre>";
         var_dump($on);
         var_dump($fields); */
-        $containsAllValues = array_diff($fields, $on);
-       /*  foreach ($on as $value) {
+        //$containsAllValues = array_diff($fields, $on);
+        /*  foreach ($on as $value) {
             if (in_array($value, $fields)) {
                 echo "1";
             }else{
                return false;
             }
         } */
-        for ($i=0; $i < count($on)-1; $i++) { 
+        for ($i = 0; $i < count($on) - 1; $i++) {
             if (!in_array($on[$i], $fields)) { //anyadir or fields no sea mas de 3 cuando anayada el login ?¿
                 return false;
             }
@@ -61,5 +61,12 @@ class Input
      * @return boolean
      */
     static function checkImage($path)
-    { }
+    {
+        $extension = strtolower(pathinfo($path, PATHINFO_EXTENSION)); // Using strtolower to overcome case sensitive
+        if (in_array($extension, self::$whiteList)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
