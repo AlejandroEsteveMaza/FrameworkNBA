@@ -24,6 +24,20 @@ class LoginController extends Controller {
      * @return void
      */
     public function ValidateAction() {
+        if (isset($_POST['submit'])) {
+            $user = Input::str($_POST['user']);
+            $password = Input::str($_POST['password']);
+        }
+
+        $campos = ["user","password","password2"];
+        $camposPOST = array_keys($_POST);
+
+        if (Input::check($campos, $camposPOST) && $password === $password2) {
+            $password = Auth::crypt($password);
+            $this->createUser($user, $password);
+        }else{
+            $this->renderView('registro');
+        }
     }
 
     /**

@@ -2,7 +2,7 @@
 namespace app\controllers;
 
 use core\MVC\Controller as Controller;
-use app\model\JugadorModel as JugadorModel;
+use app\models\JugadorModel as JugadorModel;
 
 class IndexController extends Controller {
     public function IndexAction(){

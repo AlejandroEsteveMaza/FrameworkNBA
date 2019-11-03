@@ -1,6 +1,6 @@
 <?php
 
-use app\model\JugadorModel as JugadorModel;
+use app\models\JugadorModel as JugadorModel;
 
 $jugador = JugadorModel::find(614);
 

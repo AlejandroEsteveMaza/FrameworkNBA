@@ -1,5 +1,5 @@
 <?php
-use app\model\JugadorModel as JugadorModel;
+use app\models\JugadorModel as JugadorModel;
 
 $jugador = new JugadorModel();
 foreach ($data as $key => $value) {
