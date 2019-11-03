@@ -14,7 +14,7 @@
         <form name="login" action="<?= $config['site']['root']?>/compruebaLogin" method="post">
             <input type="text" class="inputAuth" name="user" placeholder="Nombre de usuario" required/>
             <input type="password" class="inputAuth" name="password" placeholder="Password" required/>
-            <button id="authButton" type="submit">OK</button>
+            <button id="authButton" type="submit" name="submit">OK</button>
         </form>
     </div>
 </div>    

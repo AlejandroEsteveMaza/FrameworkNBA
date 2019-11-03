@@ -36,7 +36,9 @@ class RegisterController extends Controller {
         $camposPOST = array_keys($_POST);
 
         if (Input::check($campos, $camposPOST) && $password === $password2) {
+            echo $password;
             $password = Auth::crypt($password);
+            echo $password ."<br>";
             $this->createUser($user, $password);
         }else{
             $this->renderView('registro');

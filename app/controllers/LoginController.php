@@ -24,19 +24,28 @@ class LoginController extends Controller {
      * @return void
      */
     public function ValidateAction() {
-        if (isset($_POST['submit'])) {
-            $user = Input::str($_POST['user']);
-            $password = Input::str($_POST['password']);
-        }
+        //if (isset($_POST['submit'])) {
+            $user = $_POST['user'];
+            //$password = $_POST['password'];
+            
+            //echo ($user);
+        //}
 
-        $campos = ["user","password","password2"];
+        $campos = ["user","password"];
         $camposPOST = array_keys($_POST);
 
-        if (Input::check($campos, $camposPOST) && $password === $password2) {
-            $password = Auth::crypt($password);
-            $this->createUser($user, $password);
+        if (Input::check($campos, $camposPOST)) {
+            $usuario = UserModel::where('usuario','=', $user)->get();
+           
+           /*  echo "<pre>";
+            var_dump($usuario[0]["password"]); */
+            
+
+
+            $this->setSession($usuario[0]);
+           
         }else{
-            $this->renderView('registro');
+            $this->renderView('login');
         }
     }
 
@@ -51,10 +60,22 @@ class LoginController extends Controller {
     /**
      * Crea la cookie y le pasa el id de la sesión
      *
-     * @param [type] $userId
+     * @param array $usuario
      * @return void
      */
-    private function setSession($userName) {
+    private function setSession($usuario) {
+
+        echo $_POST['password'] ." --- ".$usuario["password"]."<br>";
+        var_dump(password_verify($_POST['password'], $usuario["password"]));
+        
+        if (password_verify($_POST['password'], $usuario["password"])) {
+            
+            $_SESSION['logged_in'] = true;
+            $_SESSION['username'] = $usuario["usuario"];
+            setcookie('DWS_framework',$usuario["usuario"],time()+(60*60*24*5));
+        }
+
+         
     }
 
 }
