@@ -18,7 +18,7 @@ class Input
      * Comprueba si se han pasado los campos correctos del formulario
      *
      * @param array $fields
-     * @param boolean $on
+     * @param array $on
      * @return boolean
      */
     static function check($fields, $on = false)

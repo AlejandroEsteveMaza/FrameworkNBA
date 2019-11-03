@@ -29,6 +29,7 @@ class RegisterController extends Controller {
             $user = Input::str($_POST['user']);
             $password = Input::str($_POST['password']);
             $password2 = Input::str($_POST['password2']);
+            //var_dump($_FILES["avatar"]);
         }
 
         $campos = ["user","password","password2"];
@@ -51,13 +52,20 @@ class RegisterController extends Controller {
      */
     private function createUser($userName, $password) {
         $user = new UserModel();
-        $user::getUserNameField();
-        $user::getPasswordField();
-        if ($user->save()) {
+        $usr = $user::getUserNameField();
+        $user->$usr = $userName;
+
+        $passwd = $user::getPasswordField();
+        $user->$passwd = $password;
+
+        $user->save();
+        //self->uploadAvatar();
+        return $user->lastInsertId(); //DEVUELVE 0
+       /*  if ($user->save()) {
             return $user->lastInsertId();
         }else{
             return -1;
-        }
+        } */
     }
 
     /**
