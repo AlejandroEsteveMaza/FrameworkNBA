@@ -36,13 +36,16 @@ class LoginController extends Controller {
 
         if (Input::check($campos, $camposPOST)) {
             $usuario = UserModel::where('usuario','=', $user)->get();
-           
+            $usuario = $usuario[0];
+
            /*  echo "<pre>";
             var_dump($usuario[0]["password"]); */
             
 
-
-            $this->setSession($usuario[0]);
+            if(Auth::passwordVerify($_POST['password'], $usuario["password"], $usuario["usuario"])){
+                $this->setSession($usuario);
+            }
+           
            
         }else{
             $this->renderView('login');
@@ -68,12 +71,12 @@ class LoginController extends Controller {
         echo $_POST['password'] ." --- ".$usuario["password"]."<br>";
         var_dump(password_verify($_POST['password'], $usuario["password"]));
         
-        if (password_verify($_POST['password'], $usuario["password"])) {
+        //if (password_verify($_POST['password'], $usuario["password"])) {
             
             $_SESSION['logged_in'] = true;
             $_SESSION['username'] = $usuario["usuario"];
             setcookie('DWS_framework',$usuario["usuario"],time()+(60*60*24*5));
-        }
+       // }
 
          
     }
