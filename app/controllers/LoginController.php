@@ -1,4 +1,5 @@
 <?php
+
 namespace app\controllers;
 
 use core\MVC\Controller as Controller;
@@ -9,7 +10,8 @@ use core\auth\Auth;
 /**
  * Clase para el login de usuarios
  */
-class LoginController extends Controller {
+class LoginController extends Controller
+{
     /**
      * Página donde será redirigido si el registro es correcto
      *
@@ -23,31 +25,32 @@ class LoginController extends Controller {
      *
      * @return void
      */
-    public function ValidateAction() {
+    public function ValidateAction()
+    {
         //if (isset($_POST['submit'])) {
-            $user = $_POST['user'];
-            //$password = $_POST['password'];
-            
-            //echo ($user);
+        $user = $_POST['user'];
+        //$password = $_POST['password'];
+
+        //echo ($user);
         //}
 
-        $campos = ["user","password"];
+        $campos = ["user", "password"];
         $camposPOST = array_keys($_POST);
 
         if (Input::check($campos, $camposPOST)) {
-            $usuario = UserModel::where('usuario','=', $user)->get();
+            $usuario = UserModel::where('usuario', '=', $user)->get();
             $usuario = $usuario[0];
 
-           /*  echo "<pre>";
-            var_dump($usuario[0]["password"]); */
-            
+            /* echo "<pre>";
+            var_dump($usuario);  */
 
-            if(Auth::passwordVerify($_POST['password'], $usuario["password"], $usuario["usuario"])){
+
+            if (Auth::passwordVerify($_POST['password'], $usuario["password"], $usuario["usuario"])) {
                 $this->setSession($usuario);
+            $this->renderView('inicio');
+                //header("Location:" . $GLOBALS["config"]["site"]["root"] . "/");
             }
-           
-           
-        }else{
+        } else {
             $this->renderView('login');
         }
     }
@@ -57,7 +60,14 @@ class LoginController extends Controller {
      *
      * @return void
      */
-    public function LogoutAction() {
+    public function LogoutAction()
+    {
+        setcookie('DWS_framework',$_SESSION['userName'] , time() -3600);
+        session_start();
+        session_unset();
+        session_destroy();
+        
+        $this->renderView('inicio');
     }
 
     /**
@@ -66,19 +76,20 @@ class LoginController extends Controller {
      * @param array $usuario
      * @return void
      */
-    private function setSession($usuario) {
+    private function setSession($usuario)
+    {
+        //echo  $usuario["usuario"];
+        //echo $_POST['password'] ." --- ".$usuario["password"]."<br>";
+        //var_dump(password_verify($_POST['password'], $usuario["password"]));
 
-        echo $_POST['password'] ." --- ".$usuario["password"]."<br>";
-        var_dump(password_verify($_POST['password'], $usuario["password"]));
-        
         //if (password_verify($_POST['password'], $usuario["password"])) {
-            
-            $_SESSION['logged_in'] = true;
-            $_SESSION['username'] = $usuario["usuario"];
-            setcookie('DWS_framework',$usuario["usuario"],time()+(60*60*24*5));
-       // }
+        session_start();
+        $_SESSION['loggedin'] = true;
+        $_SESSION['userName'] = $usuario["usuario"];
+        Auth::check();
+        setcookie('DWS_framework', $usuario["usuario"], time() + (60 * 60 * 24 * 5));
+        // }
 
-         
+
     }
-
 }

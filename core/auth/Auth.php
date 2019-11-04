@@ -37,6 +37,15 @@ class Auth {
      * @return boolean
      */
     static function check() {
+        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+            echo $_SESSION['userName'];
+            echo "SIIIii ";
+            return true;
+        } else {
+            //var_dump($_SESSION['userName']);
+            echo "NOoOo ";
+            return false;
+        }
     }
 
 }
