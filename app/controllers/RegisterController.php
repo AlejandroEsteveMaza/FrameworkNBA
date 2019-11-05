@@ -43,7 +43,11 @@ class RegisterController extends Controller
             $password = Auth::crypt($password);
             //echo $password ."<br>";
             $lastID = $this->createUser($user, $password);
+
+
             $this->uploadAvatar($_FILES["avatar"]["name"], $_FILES["avatar"]["tmp_name"], $lastID);
+
+
             $this->renderView('inicio');
         } else {
             $this->renderView('registro');
@@ -87,26 +91,32 @@ class RegisterController extends Controller
      */
     private function uploadAvatar($fileName, $tmpFileName, $idUser)
     {
-        if (Input::checkImage($fileName)) {
-           
-        }else{
-            echo "AAAAAAAAAAAAAAVVVVVVVVVVVVVVVVV";
-        }
-    }
-
-    private function InsertAvatar($fileName, $tmpFileName, $idUser)
-    {
-        $dbAvatarName = Input::renameImage($fileName, $idUser);
+        /* if (Input::checkImage($fileName)) {
+            
+        } */ 
+       
 
 
         $directorio = "public\images\avatars\\";
+
+        $dbAvatarName = Input::renameImage($fileName, $idUser);
         $fichero = $directorio . basename($dbAvatarName);
-        if (isset($_FILES["avatar"])) {
+        if (isset($fileName) && Input::checkImage($fileName)) {
             if (move_uploaded_file($tmpFileName, $fichero)) {
-                $user = UserModel::find($idUser);
-                $user->avatar = $dbAvatarName;
-                $user->save();
-            } 
+                echo "AAAA";
+                $this->InsertAvatar($idUser, $dbAvatarName);
+            }
+        }else{
+             echo "BBBB";
+                $this->InsertAvatar($idUser, "placeholder.png");
         }
+    }
+
+    private function InsertAvatar($idUser, $dbAvatarName)
+    {
+
+        $user = UserModel::find($idUser);
+        $user->avatar = $dbAvatarName;
+        $user->save();
     }
 }

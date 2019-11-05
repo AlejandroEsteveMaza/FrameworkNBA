@@ -15,7 +15,7 @@
             <input type="text" class="inputAuth" name="user" placeholder="Nombre de usuario" required/>
             <input type="password" class="inputAuth" name="password" placeholder="Password" required/>
             <input type="password" class="inputAuth" name="password2" placeholder="Repite password" required/>
-            <input type="file" name="avatar" required/>
+            <input type="file" name="avatar"/>
             <button id="authButton" type="submit" name="submit">OK</button>
         </form>
     </div>

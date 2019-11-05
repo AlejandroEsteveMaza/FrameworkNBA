@@ -42,8 +42,8 @@ class LoginController extends Controller
             
             $usuario = $usuario[0];
 
-            /* echo "<pre>";
-            var_dump($usuario);  */
+            echo "<pre>";
+            var_dump($usuario);
 
 
             if (Auth::passwordVerify($_POST['password'], $usuario["password"], $usuario["usuario"])) {
@@ -86,10 +86,12 @@ class LoginController extends Controller
         //var_dump(password_verify($_POST['password'], $usuario["password"]));
 
         //if (password_verify($_POST['password'], $usuario["password"])) {
-        session_start();
+        //session_start();
         $_SESSION['loggedin'] = true;
         $_SESSION['userName'] = $usuario["usuario"];
-        Auth::check();
+        $_SESSION['avatar'] = $usuario["avatar"];
+        
+        //Auth::check();
         setcookie('DWS_framework', session_id(), time() + (60 * 60 * 24 * 5));
         // }
 
