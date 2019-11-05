@@ -69,4 +69,17 @@ class Input
             return false;
         }
     }
+
+    /**
+     * Devuelve el avatar en formato "avatar" + idUsuario + .extension
+     *
+     * @param string $path
+     * @param string $idUser
+     * @return string
+     */
+    static function renameImage($path, $idUser)
+    {
+        $extension = strtolower(pathinfo($path, PATHINFO_EXTENSION));
+        return "avatar".$idUser.".".$extension;
+    }
 }

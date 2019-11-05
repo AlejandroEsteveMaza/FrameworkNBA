@@ -1,4 +1,5 @@
 <?php
+
 namespace app\controllers;
 
 use core\MVC\Controller as Controller;
@@ -9,7 +10,8 @@ use core\auth\Auth;
 /**
  * Clase para el registro de nuevos usuarios
  */
-class RegisterController extends Controller {
+class RegisterController extends Controller
+{
     /**
      * Página donde será redirigido si el registro es correcto
      *
@@ -22,9 +24,10 @@ class RegisterController extends Controller {
      *
      * @return boolean
      */
-    public function RegisterAction() {
+    public function RegisterAction()
+    {
         //Input::str();
-        
+
         if (isset($_POST['submit'])) {
             $user = Input::str($_POST['user']);
             $password = Input::str($_POST['password']);
@@ -32,16 +35,17 @@ class RegisterController extends Controller {
             //var_dump($_FILES["avatar"]);
         }
 
-        $campos = ["user","password","password2"];
+        $campos = ["user", "password", "password2"];
         $camposPOST = array_keys($_POST);
 
         if (Input::check($campos, $camposPOST) && $password === $password2) {
             //echo $password;
             $password = Auth::crypt($password);
             //echo $password ."<br>";
-            $this->createUser($user, $password);
+            $lastID = $this->createUser($user, $password);
+            $this->uploadAvatar($_FILES["avatar"]["name"], $_FILES["avatar"]["tmp_name"], $lastID);
             $this->renderView('inicio');
-        }else{
+        } else {
             $this->renderView('registro');
         }
     }
@@ -53,7 +57,8 @@ class RegisterController extends Controller {
      * @param [type] $password
      * @return int
      */
-    private function createUser($userName, $password) {
+    private function createUser($userName, $password)
+    {
         $user = new UserModel();
         $usr = $user::getUserNameField();
         $user->$usr = $userName;
@@ -61,10 +66,12 @@ class RegisterController extends Controller {
         $passwd = $user::getPasswordField();
         $user->$passwd = $password;
 
+        //$user->avatar = $avatar;
+
         $user->save();
-        //self->uploadAvatar();
-        return $user->lastInsertId(); //DEVUELVE 0
-       /*  if ($user->save()) {
+        //self->uploadAvatar();. 
+        return $user->lastInsertId();
+        /*  if ($user->save()) {
             return $user->lastInsertId();
         }else{
             return -1;
@@ -78,10 +85,28 @@ class RegisterController extends Controller {
      * @param string $tmpFileName
      * @return boolean
      */
-    private function uploadAvatar($fileName, $tmpFileName, $idUser) {
+    private function uploadAvatar($fileName, $tmpFileName, $idUser)
+    {
         if (Input::checkImage($fileName)) {
-            //inacabado
+           
+        }else{
+            echo "AAAAAAAAAAAAAAVVVVVVVVVVVVVVVVV";
         }
     }
 
+    private function InsertAvatar($fileName, $tmpFileName, $idUser)
+    {
+        $dbAvatarName = Input::renameImage($fileName, $idUser);
+
+
+        $directorio = "public\images\avatars\\";
+        $fichero = $directorio . basename($dbAvatarName);
+        if (isset($_FILES["avatar"])) {
+            if (move_uploaded_file($tmpFileName, $fichero)) {
+                $user = UserModel::find($idUser);
+                $user->avatar = $dbAvatarName;
+                $user->save();
+            } 
+        }
+    }
 }

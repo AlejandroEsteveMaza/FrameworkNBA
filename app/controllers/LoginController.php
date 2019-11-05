@@ -36,9 +36,10 @@ class LoginController extends Controller
 
         $campos = ["user", "password"];
         $camposPOST = array_keys($_POST);
+        $usuario = UserModel::where('usuario', '=', $user)->get();
 
-        if (Input::check($campos, $camposPOST)) {
-            $usuario = UserModel::where('usuario', '=', $user)->get();
+        if (Input::check($campos, $camposPOST) && count($usuario)!=0) {
+            
             $usuario = $usuario[0];
 
             /* echo "<pre>";
@@ -46,9 +47,12 @@ class LoginController extends Controller
 
 
             if (Auth::passwordVerify($_POST['password'], $usuario["password"], $usuario["usuario"])) {
+                
                 $this->setSession($usuario);
-            $this->renderView('inicio');
-                //header("Location:" . $GLOBALS["config"]["site"]["root"] . "/");
+            //$this->renderView('inicio');
+                header("Location:" . $GLOBALS["config"]["site"]["root"] . "/");
+            }else{
+                $this->renderView('login');
             }
         } else {
             $this->renderView('login');
@@ -62,12 +66,11 @@ class LoginController extends Controller
      */
     public function LogoutAction()
     {
-        setcookie('DWS_framework',$_SESSION['userName'] , time() -3600);
-        session_start();
         session_unset();
         session_destroy();
-        
-        $this->renderView('inicio');
+        setcookie('DWS_framework', "" , time() -3600);
+        header("Location:" . $GLOBALS["config"]["site"]["root"] . "/");
+        //$this->renderView('inicio');
     }
 
     /**
@@ -87,7 +90,7 @@ class LoginController extends Controller
         $_SESSION['loggedin'] = true;
         $_SESSION['userName'] = $usuario["usuario"];
         Auth::check();
-        setcookie('DWS_framework', $usuario["usuario"], time() + (60 * 60 * 24 * 5));
+        setcookie('DWS_framework', session_id(), time() + (60 * 60 * 24 * 5));
         // }
 
 

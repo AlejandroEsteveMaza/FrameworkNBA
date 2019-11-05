@@ -159,6 +159,12 @@ abstract class Model
     {
         return DB::table($this->getTable())->lastInsertId();
     }
+
+    public function codigoUser($user,$campo){
+        $instance = self::getNewInstance();
+        return DB::table($instance->getTable())->select($campo)->where($this->key, '=', $this->attributes[$this->key]);
+        
+    }
     
     public function delete()
     {

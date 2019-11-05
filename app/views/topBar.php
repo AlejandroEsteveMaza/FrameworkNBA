@@ -29,8 +29,9 @@
     <?php
     } else {
     ?>
-      <a href="<?= $config['site']['root']."/logout" ?>" class="topnav--right">Cierra Sesión</a>
-      <div class="option right"><?= $_SESSION['userName'] ?></div>
+      <a href="<?=$config['site']['root']. "/logout"?>" class="topnav--right">Cierra Sesión</a>
+      <a class="active" href=""><?= $_SESSION['userName'] ?></a>
+
 
     <?php
     }

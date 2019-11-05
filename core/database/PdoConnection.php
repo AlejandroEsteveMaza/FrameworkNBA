@@ -44,9 +44,9 @@ class PdoConnection
         return $this->execQueryNoResult($query, $params);
     }
 
-    public function lastInsertId()
+    public function lastInsertId($sql)
     {
-        return  $this->bbdd->lastInsertId();
+        return $this->execQuery($sql, null)[0]["codigo"];
     }
 
     public function update($query, $params = null)

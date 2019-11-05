@@ -117,8 +117,9 @@ class DB
 
     public function lastInsertId()
     {
+        $sql = "SELECT codigo FROM $this->table ORDER BY codigo DESC limit 1";
         $connection = PdoConnection::getInstance();
-        return $connection->lastInsertId();
+        return $connection->lastInsertId($sql);
     }
 
     public function delete()
