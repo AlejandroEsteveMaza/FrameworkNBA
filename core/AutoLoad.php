@@ -1,14 +1,18 @@
 <?php
 class AutoLoad
 {
-
+    
     public function load($classNameSpace)
     {
-        $classNameSpace =  strtolower($classNameSpace);
-        $directorio = $classNameSpace . ".php";
-        if (file_exists($directorio)) {
-        
-            require_once($directorio);
+        $dirname = dirname(dirname(__FILE__));
+        $classPath = str_replace("\\", ds, $classNameSpace);
+        $dir = $dirname.ds.$classPath.".php"; 
+
+        /* $classNameSpace =  strtolower($classNameSpace);
+        $directorio = $classNameSpace . ".php"; */
+
+        if (file_exists($dir)) {
+            require_once($dir);
         } else {
             die("El archivo {$classNameSpace}.php no se ha podido encontrar.");
         }

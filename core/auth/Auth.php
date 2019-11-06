@@ -24,7 +24,7 @@ class Auth {
      * @param [type] $idUser
      * @return boolean
      */
-    static function passwordVerify($postPassword, $password, $user) {
+    static function passwordVerify($postPassword, $password) {
         if (password_verify($postPassword, $password)) {
             return true;
         }

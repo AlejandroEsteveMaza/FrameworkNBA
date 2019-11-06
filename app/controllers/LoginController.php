@@ -42,11 +42,11 @@ class LoginController extends Controller
             
             $usuario = $usuario[0];
 
-            echo "<pre>";
-            var_dump($usuario);
+            /* echo "<pre>";
+            var_dump($usuario); */
 
 
-            if (Auth::passwordVerify($_POST['password'], $usuario["password"], $usuario["usuario"])) {
+            if (Auth::passwordVerify($_POST['password'], $usuario["password"])) {
                 
                 $this->setSession($usuario);
             //$this->renderView('inicio');
