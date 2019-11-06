@@ -13,5 +13,9 @@ class JugadorController extends Controller {
         $jugador = JugadorModel::where('codigo','=',$idJugador)->get();
         $this->renderView('jugador',$jugador);
     }
+    public function CommentAction() {
+       /*  $record = array("codigo" => 614, "Nombre" => "Josito Johnson", "Nombre_equipo" =>"Celtics", "Peso" => 231);
+        $this->renderView('jugadoresAdd', $record); */
+    }
    
 }

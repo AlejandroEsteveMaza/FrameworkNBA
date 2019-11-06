@@ -36,3 +36,13 @@ cursor: pointer;
 .active, .btn:hover {
 background-color: #007A33;
 }
+.chat{
+    display:flex;
+    flex-direction:column;
+    height:245px;
+}
+.textarea{
+    resize: none;
+    height: 215px;
+    margin: 18px;
+}

@@ -70,6 +70,11 @@ return array(
 			"controller" => "login",
 			"action" => "logout"
         ),
+        "comentario" => array(
+            "route"=> "/comentar",
+            "controller" => "jugador",
+            "action" => "comment"
+        ),
     ),
     "Error" => array(
         
