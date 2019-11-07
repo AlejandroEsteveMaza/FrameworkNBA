@@ -15,6 +15,8 @@ class View
 
     public function render($data)
     {
+        /* echo "<pre>";
+        var_dump($data); */
         global $directorioRaiz;
         include_once($directorioRaiz . ds . "app" . ds . "views" . ds . $this->view_name . ".php");
     }

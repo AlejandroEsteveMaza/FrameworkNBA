@@ -138,7 +138,7 @@ abstract class Model
 
     public function save()
     {
-        if (self::$instance) {
+        /* if (self::$instance) {
             $instance = self::$instance;
         } else {
             $instance = self::getNewInstance();
@@ -151,8 +151,24 @@ abstract class Model
             $results->update($this->attributes);
         } else {
             $results->insert($this->attributes);
+        } */
+        if ($this->exists) {
+            //var_dump();
+            $attr = array_diff($this->attributes, $this->originals);
+            if (!empty($attr)) {
+                foreach ($attr as $key => $value) {
+                    $params[$key] = $value;    
+                }
+                return DB::table($this->getTable())
+                    ->where($this->getKey(), '=', $this->getKeyValue())
+                    ->update($params);
+            }
+        } else {
+            foreach ($this->attributes as $key => $value) {
+                $params[$key] = $value;    
+            }
+            return DB::table($this->getTable())->insert($params);
         }
-        
     }
 
     public function lastInsertId()

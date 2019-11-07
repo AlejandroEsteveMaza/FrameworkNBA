@@ -103,11 +103,11 @@ class RegisterController extends Controller
         $fichero = $directorio . basename($dbAvatarName);
         if (isset($fileName) && Input::checkImage($fileName)) {
             if (move_uploaded_file($tmpFileName, $fichero)) {
-                echo "AAAA";
+                //echo "AAAA";
                 $this->InsertAvatar($idUser, $dbAvatarName);
             }
         }else{
-             echo "BBBB";
+             //echo "BBBB";
                 $this->InsertAvatar($idUser, "placeholder.png");
         }
     }
