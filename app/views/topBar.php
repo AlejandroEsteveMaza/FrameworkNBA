@@ -32,7 +32,7 @@
       
       <a href="<?=$config['site']['root']. "/logout"?>" class="topnav--right">Cierra Sesión</a>
       <a class="active" href=""><?= $_SESSION['userName'] ?></a>
-      <img class="active topnav__imagen" src="public\images\avatars\<?=$_SESSION['avatar'] ?>" alt="foto perfil">
+      <img class="active topnav__imagen" src="<?=$GLOBALS['config']['site']['root']?>/public/images/avatars/<?=$_SESSION['avatar'] ?>" alt="foto perfil">
 
     <?php
     }
