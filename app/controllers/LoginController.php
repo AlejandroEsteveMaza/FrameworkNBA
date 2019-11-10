@@ -6,6 +6,7 @@ use core\MVC\Controller as Controller;
 use app\models\UserModel;
 use core\form\Input;
 use core\auth\Auth;
+use core\JWT\JWT;
 
 /**
  * Clase para el login de usuarios
@@ -27,31 +28,23 @@ class LoginController extends Controller
      */
     public function ValidateAction()
     {
-        //if (isset($_POST['submit'])) {
+      
         $user = $_POST['user'];
-        //$password = $_POST['password'];
-
-        //echo ($user);
-        //}
-
+       
         $campos = ["user", "password"];
         $camposPOST = array_keys($_POST);
         $usuario = UserModel::where('usuario', '=', $user)->get();
 
-        if (Input::check($campos, $camposPOST) && count($usuario)!=0) {
-            
+        if (Input::check($campos, $camposPOST) && count($usuario) != 0) {
+
             $usuario = $usuario[0];
 
-            /* echo "<pre>";
-            var_dump($usuario); */
-
-
             if (Auth::passwordVerify($_POST['password'], $usuario["password"])) {
-                
+
                 $this->setSession($usuario);
-            //$this->renderView('inicio');
+               
                 header("Location:" . $GLOBALS["config"]["site"]["root"] . "/");
-            }else{
+            } else {
                 $this->renderView('login');
             }
         } else {
@@ -66,11 +59,8 @@ class LoginController extends Controller
      */
     public function LogoutAction()
     {
-        session_unset();
-        session_destroy();
-        setcookie('DWS_framework', "" , time() -3600);
+        setcookie('DWS_framework', "", time() - 3600);
         header("Location:" . $GLOBALS["config"]["site"]["root"] . "/");
-        //$this->renderView('inicio');
     }
 
     /**
@@ -81,20 +71,14 @@ class LoginController extends Controller
      */
     private function setSession($usuario)
     {
-        //echo  $usuario["usuario"];
-        //echo $_POST['password'] ." --- ".$usuario["password"]."<br>";
-        //var_dump(password_verify($_POST['password'], $usuario["password"]));
+        $key = $GLOBALS["config"]["JWT"]["key"];
+        $token = array(
+            "loggedin" => true,
+            "userName" => $usuario["usuario"],
+            "avatar" => $usuario["avatar"]
+        ); 
+        $jwt = JWT::encode($token, $key);
 
-        //if (password_verify($_POST['password'], $usuario["password"])) {
-        //session_start();
-        $_SESSION['loggedin'] = true;
-        $_SESSION['userName'] = $usuario["usuario"];
-        $_SESSION['avatar'] = $usuario["avatar"];
-        
-        //Auth::check();
-        setcookie('DWS_framework', session_id(), time() + (60 * 60 * 24 * 5));
-        // }
-
-
+        setcookie('DWS_framework', $jwt, time() + (60 * 60 * 24 * 5));
     }
 }

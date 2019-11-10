@@ -11,5 +11,9 @@ return array(
         "name" => "nba",
         "USERNAME" => "root",
         "PASSWORD" => "root",
-    )
+    ),
+    "JWT" => array(
+        "key" => "DWS_framework",
+    ),
+    
 );

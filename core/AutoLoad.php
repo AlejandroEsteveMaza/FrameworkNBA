@@ -8,9 +8,6 @@ class AutoLoad
         $classPath = str_replace("\\", ds, $classNameSpace);
         $dir = $dirname.ds.$classPath.".php"; 
 
-        /* $classNameSpace =  strtolower($classNameSpace);
-        $directorio = $classNameSpace . ".php"; */
-
         if (file_exists($dir)) {
             require_once($dir);
         } else {

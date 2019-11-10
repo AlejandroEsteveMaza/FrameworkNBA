@@ -25,7 +25,6 @@
             </tr>
             <?php
             foreach ($data[1] as $value) {
-                //echo ("-" . $value["comentario"]);
                 echo "<tr>
                     <td>" . $value['usuario'] . "</td>
                     <td>" . $value['comentario'] . "</td>

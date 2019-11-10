@@ -1,7 +1,7 @@
 <?php
 namespace core\auth;
 use app\models\UserModel;
-
+use core\JWT\JWT;
 /**
  * Clase para validar usuarios
  */
@@ -37,13 +37,14 @@ class Auth {
      * @return boolean
      */
     static function check() {
-        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_COOKIE["DWS_framework"] == session_id()) {
-            echo $_SESSION['userName'];
-            echo "SIIIii ";
+       /*  $key = $GLOBALS["config"]["JWT"]["key"];
+        $token = $GLOBALS["config"]["JWT"]["token"];
+        $jwt = JWT::encode($token, $key); */
+        if (isset($_COOKIE["DWS_framework"])/* isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_COOKIE["DWS_framework"] == session_id() */) {
+            
             return true;
         } else {
-            //var_dump($_SESSION['userName']);
-            echo "NOoOo ";
+           
             return false;
         }
     }

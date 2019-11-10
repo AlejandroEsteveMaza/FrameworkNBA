@@ -6,6 +6,7 @@ use core\MVC\Controller as Controller;
 use app\models\JugadorModel as JugadorModel;
 use app\models\UserModel;
 use app\models\CommentsModel;
+use core\JWT\JWT;
 
 class JugadorController extends Controller
 {
@@ -19,13 +20,18 @@ class JugadorController extends Controller
         $jugador = JugadorModel::where('codigo', '=', $idJugador)->get();
 
         $comentarios = CommentsModel::where('jugador', '=', $idJugador)->get();
-
+        
         $data = array($jugador[0], $comentarios);
         $this->renderView('jugador', $data);
     }
     public function CommentAction()
     {
-        $usuario = UserModel::where('usuario', '=', $_SESSION['userName'])->get();
+        $key = $GLOBALS["config"]["JWT"]["key"];
+        $decoded = JWT::decode($_COOKIE["DWS_framework"], $key, array('HS256'));
+        $decoded_array = (array) $decoded;
+        var_dump( $decoded);
+      
+        $usuario = UserModel::where('usuario', '=', $decoded_array['userName'] )->get();
         
 
         if (!isset($usuario) || count($usuario) == 0) {

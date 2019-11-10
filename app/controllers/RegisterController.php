@@ -39,9 +39,9 @@ class RegisterController extends Controller
         $camposPOST = array_keys($_POST);
 
         if (Input::check($campos, $camposPOST) && $password === $password2) {
-            //echo $password;
+
             $password = Auth::crypt($password);
-            //echo $password ."<br>";
+
             $lastID = $this->createUser($user, $password);
 
 
@@ -93,8 +93,8 @@ class RegisterController extends Controller
     {
         /* if (Input::checkImage($fileName)) {
             
-        } */ 
-       
+        } */
+
 
 
         $directorio = "public\images\avatars\\";
@@ -103,12 +103,10 @@ class RegisterController extends Controller
         $fichero = $directorio . basename($dbAvatarName);
         if (isset($fileName) && Input::checkImage($fileName)) {
             if (move_uploaded_file($tmpFileName, $fichero)) {
-                //echo "AAAA";
                 $this->InsertAvatar($idUser, $dbAvatarName);
             }
-        }else{
-             //echo "BBBB";
-                $this->InsertAvatar($idUser, "placeholder.png");
+        } else {
+            $this->InsertAvatar($idUser, "placeholder.png");
         }
     }
 
