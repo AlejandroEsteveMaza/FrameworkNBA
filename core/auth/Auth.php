@@ -37,7 +37,7 @@ class Auth {
      * @return boolean
      */
     static function check() {
-        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_COOKIE["DWS_framework"] == session_id()) {
             echo $_SESSION['userName'];
             echo "SIIIii ";
             return true;
