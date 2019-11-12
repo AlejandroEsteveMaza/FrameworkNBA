@@ -31,7 +31,7 @@ class Kernel extends Router
 	public function run()
 	{
 		$ruta  = $this->parseUriRouter();
-		var_dump($ruta);
+		//var_dump($ruta);
 		if ($ruta != null) {
 			$this->setControllerName($ruta["controller"]);
 			$this->setAtionName($ruta["action"]);

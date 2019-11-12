@@ -87,11 +87,12 @@ class DB
         $wheres = $this->wheresParaSQL();
 
         $sql = 'SELECT ' . $fields . ' FROM ' . $this->table;
-        if (isset($wheres)) {
+        if (!empty($wheres)) {
             $sql .= ' WHERE ' . $wheres["sql"];
         }
         $connection = PdoConnection::getInstance();
-        
+        $test = $wheres["params"];
+        var_dump($test);
         return $connection->select($sql,$wheres["params"]);
         
     }

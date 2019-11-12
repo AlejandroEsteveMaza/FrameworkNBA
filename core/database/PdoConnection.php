@@ -64,6 +64,9 @@ class PdoConnection
     {
         $sth = $this->bbdd->prepare($query);
         $sth ->execute($params);
+        /* echo "<pre>";
+        $sth->debugDumpParams();
+        echo "<br>"; */
         return $sth->fetchAll(\PDO::FETCH_ASSOC);
     }
 
