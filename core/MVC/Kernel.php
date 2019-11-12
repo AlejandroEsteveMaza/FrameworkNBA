@@ -21,13 +21,17 @@ class Kernel extends Router
 	public function __construct()
 	{
 		global $directorioRaiz;
-		$routes = require_once $directorioRaiz . ds . 'routes' . ds . 'web.php';
+		//$routes = require_once $directorioRaiz . ds . 'routes' . ds . 'web.php';
+		$routes = require_once $directorioRaiz . ds . 'routes' . ds . 'api.php';
+		/* echo "<pre	>";
+		var_dump($routes ); */
 		$this->addRoutesFromFile($routes);
 	}
 
 	public function run()
 	{
 		$ruta  = $this->parseUriRouter();
+		var_dump($ruta);
 		if ($ruta != null) {
 			$this->setControllerName($ruta["controller"]);
 			$this->setAtionName($ruta["action"]);

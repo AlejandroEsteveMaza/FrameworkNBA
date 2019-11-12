@@ -48,7 +48,13 @@ abstract class Model
     {
         $instance = self::getNewInstance();
         $results = DB::table($instance->getTable())->get();
-        return $instance->toInstances($results);
+        return $instance->toInstances($results)[0];
+    }
+    public static function getAllToAPI()
+    {
+        $instance = self::getNewInstance();
+        $results = DB::table($instance->getTable())->get();
+        return $results;
     }
 
     private function toInstances($results, $exits = true)
@@ -77,6 +83,13 @@ abstract class Model
         $results = DB::table($instance->getTable())->where($instance->getKey(), '=', $id)->get();
 
         return $instance->toInstances($results)[0];
+    }
+    public static function findToAPI($id)
+    {
+        $instance = self::getNewInstance();
+        $results = DB::table($instance->getTable())->where($instance->getKey(), '=', $id)->get();
+
+        return $results;
     }
 
     protected function getTable()
