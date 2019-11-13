@@ -4,18 +4,16 @@
     <meta charset="utf-8" />
     <title>Login</title>
     <link rel="stylesheet" type="text/css" media="screen" href="public/css/login-register.css" />
+    <script src="../web/main.js"></script>
 </head>
 <body>
-<?php
-    include "topBar.php"; 
-?>
 <div id="content">
     <div id="loginForm">
-        <form name="login" action="<?= $config['site']['root']?>/compruebaLogin" method="post">
-            <input type="text" class="inputAuth" name="user" placeholder="Nombre de usuario" required/>
-            <input type="password" class="inputAuth" name="password" placeholder="Password" required/>
-            <button id="authButton" type="submit" name="submit">OK</button>
-        </form>
+      
+            <input type="text" class="inputAuth" name="user" placeholder="Nombre de usuario" id="nomUsuario" required/>
+            <input type="password" class="inputAuth" name="password" placeholder="Password"  id="password" required/>
+            <button id="authButton" onclick="login()">OK</button>
+        
     </div>
 </div>    
 </body>
