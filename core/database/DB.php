@@ -91,9 +91,12 @@ class DB
             $sql .= ' WHERE ' . $wheres["sql"];
         }
         $connection = PdoConnection::getInstance();
-        $test = $wheres["params"];
-        var_dump($test);
-        return $connection->select($sql,$wheres["params"]);
+        $params = null;
+        
+        if ($wheres != null) {
+            $params = $wheres["params"];
+        }
+        return $connection->select($sql, $params);
         
     }
 
