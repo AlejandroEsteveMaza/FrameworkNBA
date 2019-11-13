@@ -2,8 +2,8 @@
 
 return array(
     "site" => array(
-        "root" => "http://localhost/FrameworkNBA",
-        "subdomain" => "FrameworkNBA",
+        "root" => "http://localhost/FrameworkNBA/api",
+        "subdomain" => "FrameworkNBA/api",
         "api" => "/api/",
     ),
     "DB" => array(

@@ -35,7 +35,7 @@ class Router
 	
 
 		foreach ($this->routers as $currentRoute) {
-			var_dump($currentRoute);
+			//var_dump($currentRoute);
 			$route = $config["site"]["subdomain"]  . rtrim($currentRoute["route"], "/");
 			
 			$routerPattern = "#^" . preg_replace('/\\\:[a-zA-Z0-9\_\-]+/', '([a-zA-Z0-9\-\_]+)', preg_quote($route)) . "$#D";

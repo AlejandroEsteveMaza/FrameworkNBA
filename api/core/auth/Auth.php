@@ -48,5 +48,23 @@ class Auth {
             return false;
         }
     }
+    
+    /**
+     * Crea el token
+     *
+     * @param  array $usuario
+     *
+     * @return token
+     */
+    static function createToken($usuario){
+        $key = $GLOBALS["config"]["JWT"]["key"];
+        $token = array(
+            "loggedin" => true,
+            "userName" => $usuario["usuario"],
+            "avatar" => $usuario["avatar"]
+        ); 
+        $jwt = JWT::encode($token, $key);
+        return $jwt;
 
+    }
 }

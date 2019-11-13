@@ -71,14 +71,7 @@ class LoginController extends Controller
      */
     private function setSession($usuario)
     {
-        $key = $GLOBALS["config"]["JWT"]["key"];
-        $token = array(
-            "loggedin" => true,
-            "userName" => $usuario["usuario"],
-            "avatar" => $usuario["avatar"]
-        ); 
-        $jwt = JWT::encode($token, $key);
-
+        $jwt = Auth::createToken($usuario);
         setcookie('DWS_framework', $jwt, time() + (60 * 60 * 24 * 5));
     }
 }
