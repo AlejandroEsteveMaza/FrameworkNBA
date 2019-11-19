@@ -3,7 +3,7 @@
 return array(
     "get" => array(
         "Jugadores" => array(
-            "route"=> "/getjugadores",
+            "route"=> "/jugadores",
             "controller" => "api",
             "action" => "getJugadores"
         ),

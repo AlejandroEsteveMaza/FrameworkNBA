@@ -37,14 +37,12 @@ class Auth {
      * @return boolean
      */
     static function check() {
-       /*  $key = $GLOBALS["config"]["JWT"]["key"];
-        $token = $GLOBALS["config"]["JWT"]["token"];
-        $jwt = JWT::encode($token, $key); */
-        if (isset($_COOKIE["DWS_framework"])/* isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_COOKIE["DWS_framework"] == session_id() */) {
-            
-            return true;
-        } else {
-           
+        $key = $GLOBALS["config"]["JWT"]["key"];
+        if (isset($_COOKIE["DWS_framework"])) {
+            if (JWT::decode($_COOKIE["DWS_framework"], $key, array('HS256'))) {
+               return true;
+            }
+        }else{
             return false;
         }
     }
